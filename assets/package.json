@@ -1,0 +1,24 @@
+{
+  "name": "bluebox",
+  "version": "2.0.0",
+  "main": "gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-compass": "~0.2.0",
+    "grunt-contrib-imagemin": "~0.1.4",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-uglify": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-coffee": "0.7.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-browser-sync": "~0.2.6",
+    "grunt-pagespeed": "0.0.8",
+    "css-parse": "~1.5.3",
+    "grunt-combine-media-queries": "~1.0.9",
+    "grunt-uncss": "~0.1.9",
+    "grunt-autoprefixer": "~0.6.5"
+  }
+}

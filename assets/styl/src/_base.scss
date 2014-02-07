@@ -1,0 +1,29 @@
+@import "../lib/susy";
+
+$total-columns  : 24;
+$column-width   : 4em;
+$gutter-width   : 1em;
+$grid-padding   : 0;
+
+$container-style: fluid;
+$container-width: 80em;
+
+$at-1200: 24 75em;
+$at-1168: 24 73em;
+$at-1024: 24 64em;
+$at-976:  24 61em;
+$at-960:  24 60em;
+$at-896:  24 56em;
+$at-848:  24 53em;
+$at-768:  24 48em;
+$at-720:  24 45em;
+$at-684:  24 43em;
+$at-640:  24 40em;
+$at-608:  24 38em;
+$at-560:  24 35em;
+$at-540:  24 34em;
+$at-480:  24 30em;
+$at-400:  24 25em;
+$at-320:  24 20em;
+
+$show-grid-backgrounds  : true;
