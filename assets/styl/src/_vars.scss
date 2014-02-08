@@ -11,6 +11,7 @@
 a {
 	@include transition(all 0.25s ease-in);
 	text-decoration: none;
+	color: red;
 }
 
 .wrapper {
