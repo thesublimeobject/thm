@@ -1,5 +1,7 @@
 <?php
 
+define("THEME_DIR", get_template_directory_uri());
+
 if ( function_exists( 'add_theme_support' ) ) {
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size();
@@ -54,7 +56,14 @@ add_action( 'init', 'jfcs_register_menus' );
 
 /* _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ SCRIPTS _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ */
 
-function jfcs_enqueue_scripts() {
+
+function nwc_enqueue_styles() {
+    wp_register_style( 'screen', get_template_directory_uri() . '/assets/styl/bld/screen.css', array(), '1', 'all' );
+    wp_enqueue_style( 'screen' );
+}
+add_action( 'wp_enqueue_scripts', 'nwc_enqueue_styles' );
+
+function nwc_enqueue_scripts() {
 	wp_enqueue_script( 'app', get_template_directory_uri() . '/assets/js/bld/main.min.js', array('jquery'), true);
 }
 
