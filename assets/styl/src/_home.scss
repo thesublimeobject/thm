@@ -1,25 +1,3 @@
 /*--------------------------------------------------------*\
-	Landing
+	Hoome
 \*--------------------------------------------------------*/
-
-section.home {
-	@include sec(#fff);
-	section.home-inner {
-		@include sub-sec;
-	}
-}
-
-.bkts {
-	@include span-columns(8,24);
-	&:last-child {
-		@include omega;
-	}
-	@include at-breakpoint($at-848) {
-		padding: 0.5rem;
-	}
-	@include at-breakpoint($at-720) {
-		@include span-columns(24,24);
-		padding: 0;
-		margin-bottom: 1.5rem;
-	}
-}
