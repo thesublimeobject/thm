@@ -1,8 +1,7 @@
 {
-  "name": "thm",
-  "version": "0.1.0",
+  "name": "virtual-instruments",
+  "version": "1.0.0",
   "author": "hunter b rose",
-  "description": "a simple zero-configuration command-line http server",
   "devDependencies": {
     "gulp-rename": "~1.0.0",
     "tiny-lr": "0.0.5",
@@ -20,6 +19,10 @@
     "gulp-uglify": "~0.2.0",
     "gulp-compass": "~1.1.1",
     "gulp-coffee": "~1.4.1",
-    "gulp-beautify": "~1.0.3"
+    "gulp-beautify": "~1.0.3",
+    "gulp-coffeelint": "~0.2.1",
+    "gulp-changed": "~0.2.0",
+    "gulp-watch": "~0.5.0",
+    "gulp-newer": "~0.2.1"
   }
 }

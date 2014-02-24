@@ -6,53 +6,33 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><?php wp_title( '|', true, 'right' ); ?><?php bloginfo( 'name' ); ?></title>
+	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/7655652/762784/css/fonts.css" />
 	<?php wp_head(); ?>
 </head>
 
 <body>
 	<div class="wrapper">
 		<header class="header">
-			<div class="u-nav-ctn">
-				<div class="fix-wrap">
-					<figure class="logo">
-						<a href="/">
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="Senior Concierge Logo">
-						</a>
-					</figure>
+			<div class="ctn">
+				<div class="header-top">
+					<span data-picture data-alt="Virtual Instruments" class="logo">
+						<span data-src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.min.png"></span>
+					</span>
 					<nav class="u-nav">
 						<?php 
 							$args = array ( 'menu' => 'Universal Navigation', 'container' => false );
 							wp_nav_menu( $args );
 						?>
 					</nav>
-					<div class="sidr-btn-ctn">
-						<a href="#sidr" id="press" class="navicon-btn x">
-							<div class="navicon"></div>
-						</a>
-					</div>
+				</div>
+				<div class="header-btm">
+					<nav class="nav">
+						<?php 
+							$args = array ( 'menu' => 'Navigation', 'container' => false );
+							wp_nav_menu( $args );
+						?>				
+					</nav>
 				</div>
 			</div>
 		</header>
-
-		<nav id="sidr">
-			<div class="sidr-inner">
-				<h3>JFCS</h3>
-				<div class="nav-m">
-					<ul>
-					<?php 
-						$args = array ( 'menu' => 'Navigation', 'container' => false );
-						wp_nav_menu( $args );
-						$args = array ( 'title_li' => '', 'include' => '162,278,24' );
-						wp_list_pages($args);
-					?>	
-					</ul>				
-				</div>
-				<div class="u-nav-m">
-					<?php 
-						$args = array ( 'menu' => 'Universal Navigation', 'container' => false );
-						wp_nav_menu( $args );
-					?>			
-				</div>
-			</div>
-		</nav>
-
+		<div class="header-fill"></div>
