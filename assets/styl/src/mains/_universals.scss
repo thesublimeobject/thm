@@ -1,0 +1,76 @@
+/*--------------------------------------------------------*\
+   Universals
+\*--------------------------------------------------------*/
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+}
+
+html {
+	font-size: 16px;
+}
+
+a {
+	transition: all 0.25s ease-in;
+	text-decoration: none;
+}
+
+.wrapper {
+	@include container();
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.ctn {
+	@include container(center);
+	position: relative;
+	max-width: 74rem;
+	padding: 0 5rem;
+	@include breakpoint($at-896) {
+		padding: 0 4rem;
+	}
+	@include breakpoint($at-768) {
+		padding: 0 3.5rem;
+	}
+	@include breakpoint($at-720) {
+		padding: 0 3rem;
+	}
+	@include breakpoint($at-480) {
+		padding: 0 1.5rem;
+	}
+	@include breakpoint($at-320) {
+		padding: 0 1rem;
+	}
+}
+
+/*--------------------------------------------------------*\
+   Mains
+\*--------------------------------------------------------*/
+
+section.each-section {
+	@include full;
+	padding: 5rem 0;
+}
+
+.section-title {
+	@include full;
+	@include lt(2rem, 1.25);
+	margin-bottom: 1.5rem;
+}
+
+.cnt {
+	@include span(20);
+	@include squish(2);
+	@include lt(1rem, 1.5);
+	p {
+		margin-bottom: 1rem;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

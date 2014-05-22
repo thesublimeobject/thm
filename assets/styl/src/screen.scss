@@ -1,13 +1,26 @@
+/*--------------------------------------------------------*\
+   Mains
+\*--------------------------------------------------------*/
 
+@import "mains/base";
+@import "mains/reset";
+@import "mains/colors";
+@import "mains/fonts";
+@import "mains/icons";
+@import "mains/mixins";
+@import "mains/universals";
+@import "mains/vars";
 
-@import "base";
-@import "reset";
-@import "../lib/bourbon/bourbon";
-@import "vars";
-@import "header";
-@import "home";
-@import "sidr";
-@import "footer";
-@import "social";
-@import "interior";
-@import "contact";
+/*--------------------------------------------------------*\
+   Site
+\*--------------------------------------------------------*/
+
+@import "site/header";
+@import "site/home";
+@import "site/footer";
+
+/*--------------------------------------------------------*\
+   Libs
+\*--------------------------------------------------------*/
+
+//@import "../lib/plg/sidr";

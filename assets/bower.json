@@ -1,0 +1,8 @@
+{
+  "name": "thm",
+  "version": "1.0.0",
+  "dependencies": {
+    "underscore": "~1.6.0"
+  },
+  "private": true
+}

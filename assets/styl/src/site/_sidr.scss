@@ -1,0 +1,156 @@
+/*--------------------------------------------------------*\
+    sidr
+\*--------------------------------------------------------*/
+
+// #sidr {
+//     display: none;
+//     position: fixed;
+//     top: 0;
+//     height: 100%;
+//     z-index: 999999;
+//     width: 16rem;
+//     overflow-x: none;
+//     overflow-y: auto;
+//     background: #000;
+//     @include rg(0.75rem, 1);
+//     text-transform: uppercase;
+//     text-align: center;
+//     &.left {
+//         left: -16em;
+//         right: auto;
+//     }
+//     a.close-sidr {
+//         position: absolute;
+//         right: 2em;
+//         top: 1em;
+//     }
+//     ul {
+//         display: block;
+//         &.sub-menu {
+//             display: none;
+//         }
+//         li {
+//             display: block;
+//             padding: 1rem 0;
+//             border-bottom: 1px solid #333;
+//             &:first-child {
+//                 border-top: 1px solid #333;
+//             }
+//             a {
+//                 display: block;
+//                 text-decoration: none;
+//                 color: #fff;
+//                 &:hover {
+//                     color: $yellow;
+//                 }
+//                 &:focus {
+//                     color: $yellow;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+/*--------------------------------------------------------*\
+    navicon
+\*--------------------------------------------------------*/
+
+#press {
+    display: none;
+    @include at-breakpoint($at-848) {
+        display: inline-block;
+        position: relative;
+        img {
+            width: 1.75em;
+            height: auto;
+        }
+    }
+}
+
+.sidr-btn-ctn {
+    @extend .v-center;
+    right: 4rem;
+    z-index: 100;
+}
+
+$transition-duration: .5s;
+$size: 100%;
+$toggled-size: .75;
+$pagebg: #fff;
+$rad: 0;
+$width: 2rem;
+$height: 0.325rem;
+
+.navicon-btn {
+    display: inline-block;
+    position: relative;
+    padding: 2.0625rem 1.5rem;
+    transition: $transition-duration/2;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.8;
+    .navicon:before, .navicon:after {
+        transition: $transition-duration/2;
+    }
+    &:hover {
+        transition: $transition-duration;
+        opacity: 1;
+        .navicon:before, .navicon:after {
+            transition: $transition-duration/2;
+        }
+        .navicon:after { 
+            top: -0.75rem; 
+        }
+        .navicon:before { 
+            top: 0.75rem; 
+        }
+    }
+}
+
+.navicon {
+    position: relative;
+    width: $width;
+    height: $height;
+    background: $pagebg;
+    transition: $transition-duration;
+    border-radius: $rad;
+    &:after, &:before {
+        display: block;
+        content: "";
+        height: $height;
+        width: $width;
+        background: $pagebg;
+        position: absolute;
+        z-index: -1;
+        transition: $transition-duration $transition-duration/2;
+        border-radius: $rad;
+    }
+    &:after { 
+        top: -0.625rem; 
+    }
+    &:before { 
+        top: 0.625rem; 
+    }
+}
+
+.open:not(.steps) .navicon:before,
+.open:not(.steps) .navicon:after {
+  top: 0 !important;
+}
+
+.open .navicon:before,
+.open .navicon:after {
+    transition: $transition-duration;
+}
+
+.open.x {
+    .navicon {
+        background: transparent;
+        &:after { 
+            transform: rotate(45deg); 
+        }  
+        &:before { 
+            transform: rotate(-45deg); 
+        }  
+    }
+}

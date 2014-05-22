@@ -1,0 +1,37 @@
+/*--------------------------------------------------------*\
+   Positioning
+\*--------------------------------------------------------*/
+
+$timing: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+
+.v-center {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.h-center {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.un-center {
+	position: relative;
+	top: 0;
+	left: 0;
+	transform: translate(0,0);
+}
+
+.bg-center {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
