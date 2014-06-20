@@ -38,18 +38,7 @@ jQuery ($) ->
 	serviceTitle.hoverIntent ->
 		$(@).parent().find(serviceContent).slideToggle()
 
+	hello = $('.hello')
 
-	# catNames = 
-	# 	names: []
-	# 	addName: (x) ->
-	# 		catNames.names.push(x)
-
-	# catNames.addName "Bill"
-	# catNames.addName "Tori"
-	# console.log(catNames.names)
-
-
-
-
-
-
+	$('.this-is-an-element').each ->
+		$(@).hide()

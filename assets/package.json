@@ -2,7 +2,20 @@
   "name": "virtual-instruments",
   "version": "1.0.0",
   "author": "hunter b rose",
+  "browserify": {
+      "transform": ["coffeeify"]
+  },
   "devDependencies": {
+    "browser-sync": "~0.8.2",
+    "browserify-shim": "~3.4.1",
+    "connect": "~2.14.3",
+    "gulp-changed": "~0.3.0",
+    "gulp-notify": "~1.2.4",
+    "gulp-open": "~0.2.8",
+    "vinyl-source-stream": "~0.1.1",
+    "watchify": "~0.10.1",
+    "gulp-util": "~2.2.14",
+    "pretty-hrtime": "~0.2.1",
     "gulp-rename": "~1.0.0",
     "tiny-lr": "0.0.5",
     "gulp-ruby-sass": "~0.3.0",
@@ -15,7 +28,7 @@
     "gulp-autoprefixer": "0.0.6",
     "gulp-imagemin": "~0.1.5",
     "gulp-concat": "~2.1.7",
-    "gulp": "~3.5.2",
+    "gulp": "~3.7.0",
     "gulp-uglify": "~0.2.0",
     "gulp-compass": "~1.1.1",
     "gulp-coffee": "~1.4.1",
@@ -23,6 +36,9 @@
     "gulp-coffeelint": "~0.2.1",
     "gulp-changed": "~0.2.0",
     "gulp-watch": "~0.5.0",
-    "gulp-newer": "~0.2.1"
+    "gulp-newer": "~0.2.1",
+    "vinyl-source-stream": "~0.1.1",
+    "browserify": "~3.36.0",
+    "coffeeify": "~0.6.0"
   }
 }
