@@ -17,7 +17,12 @@ a {
 }
 
 .wrapper {
-	@include container();
+	@include container;
+	// opacity: 0;
+	// transition: opacity 0.5s ease-in-out;
+	// &.clean-load {
+	// 	opacity: 1;
+	// }
 }
 
 img {
@@ -27,23 +32,27 @@ img {
 }
 
 .ctn {
-	@include container(center);
+	//@include container(center);
+	@include container;
+	@include set-container-width(24, fluid);
+	display: block;
+	margin: 0 auto;
 	position: relative;
 	max-width: 74rem;
 	padding: 0 5rem;
-	@include breakpoint($at-896) {
+	@include at-breakpoint($at-896) {
 		padding: 0 4rem;
 	}
-	@include breakpoint($at-768) {
+	@include at-breakpoint($at-768) {
 		padding: 0 3.5rem;
 	}
-	@include breakpoint($at-720) {
+	@include at-breakpoint($at-720) {
 		padding: 0 3rem;
 	}
-	@include breakpoint($at-480) {
+	@include at-breakpoint($at-480) {
 		padding: 0 1.5rem;
 	}
-	@include breakpoint($at-320) {
+	@include at-breakpoint($at-320) {
 		padding: 0 1rem;
 	}
 }
@@ -64,13 +73,46 @@ section.each-section {
 }
 
 .cnt {
-	@include span(20);
-	@include squish(2);
-	@include lt(1rem, 1.5);
+	@include span-columns(18,24);
+	@include squish(3,3);
+	@include lt(0.9rem, 1.5);
 	p {
 		margin-bottom: 1rem;
 		&:last-child {
 			margin-bottom: 0;
+		}
+	}
+	ul {
+		list-style: disc;
+		list-style-position: outside;
+		margin-left: 1rem;
+		li {
+			margin-bottom: 1rem;
+		}
+	}
+	ol {
+		list-style: decimal;
+		list-style-position: outside;
+		margin-left: 1rem;
+		 li {
+		 	margin-bottom: 1rem;
+		 }
+	}
+	strong {
+		@include md(0.9rem, 1.5);
+	}
+	em {
+		@include lt(0.9rem, 1.5, italic);
+	}
+	a {
+		color: $teal;
+		@include rg(0.9rem, 1.5);
+		&:hover {
+			color: $teal-hover;
+		}
+		&.short-btn {
+			color: #fff;
+			@include md(0.9rem, 1.5);
 		}
 	}
 }
