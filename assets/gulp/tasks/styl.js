@@ -1,9 +1,9 @@
 var gulp         = require('gulp');
 var sass         = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var minifycss 	 = require('gulp-minify-css');
+var minifycss    = require('gulp-minify-css');
 var notify       = require('gulp-notify');
-var rename 		 = require('gulp-rename');
+var rename       = require('gulp-rename');
 var handleErrors = require('../util/handleErrors');
 var browserSync  = require('browser-sync');
 
