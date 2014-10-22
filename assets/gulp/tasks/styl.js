@@ -10,6 +10,7 @@ var browserSync  = require('browser-sync');
 gulp.task('styl', function() {
     return gulp.src('styl/src/screen.scss')
         .pipe(sass({
+            errLogToConsole: true,
             includePaths: [
                 './styl/lib/__vendors/harp-susy/scss',
                 './styl/lib/__vendors/harp-compass/scss'

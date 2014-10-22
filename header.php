@@ -22,10 +22,5 @@
 						wp_nav_menu( $args );
 					?>
 				</nav>
-<!-- 				<div class="sidr-btn-ctn">
-					<a href="#" id="press" class="navicon-btn x">
-						<div class="navicon"></div>
-					</a>
-				</div>	 -->
 			</div>
 		</header>	

@@ -2,27 +2,33 @@
    Universals
 \*--------------------------------------------------------*/
 
-*, *::before, *::after {
+html {
+	font-size: 16px;
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 }
 
-html {
-	font-size: 16px;
+html, body, .wrapper { 
+	height: 100%; 
+}
+
+*, *::before, *::after {
+	box-sizing: inherit;
+	-webkit-font-smoothing: inherit;
 }
 
 a {
-	transition: all 0.25s ease-in;
+	transition: all 0.75s $timing;
 	text-decoration: none;
 }
 
 .wrapper {
 	@include container;
-	// opacity: 0;
-	// transition: opacity 0.5s ease-in-out;
-	// &.clean-load {
-	// 	opacity: 1;
-	// }
+	opacity: 0;
+	transition: opacity 1s ease;
+	&.clean-load {
+		opacity: 1;
+	}
 }
 
 img {
@@ -32,7 +38,6 @@ img {
 }
 
 .ctn {
-	//@include container(center);
 	@include container;
 	@include set-container-width(24, fluid);
 	display: block;
@@ -61,13 +66,8 @@ img {
    Mains
 \*--------------------------------------------------------*/
 
-section.each-section {
-	@include full;
-	padding: 5rem 0;
-}
-
 .section-title {
-	@include full;
+	@include span-columns(24,24);;
 	@include lt(2rem, 1.25);
 	margin-bottom: 1.5rem;
 }
