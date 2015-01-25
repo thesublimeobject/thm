@@ -1,36 +1,36 @@
 /*--------------------------------------------------------*\
-   Positioning
+	Positioning
 \*--------------------------------------------------------*/
 
 $timing: cubic-bezier(0.190, 1.000, 0.220, 1.000);
 
-.v-center {
+@mixin v-center() {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 }
 
-.h-center {
+@mixin h-center() {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
-.center {
+@mixin center() {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
 
-.un-center {
+@mixin un-center() {
 	position: relative;
 	top: 0;
 	left: 0;
 	transform: translate(0,0);
 }
 
-.bg-center {
+@mixin bg-center() {
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -77,62 +77,3 @@ $timing: cubic-bezier(0.190, 1.000, 0.220, 1.000);
 		}
 	}
 }
-
-/*--------------------------------------------------------*\
-	Positioning and Triangles
-\*--------------------------------------------------------*/
-
-@mixin position($position, $args) {
-	position: $position;
-	$offsets: top right bottom left;
-	@each $o in $offsets {
-		$i: index($args, $o);
-
-		@if $i and $i + 1 <= length($args) and type-of( nth($args, $i + 1) ) == number {
-			#{$o}: nth($args, $i + 1);
-		}
-	}
-}
-
-@mixin absolute($args) {
-	@include position(absolute, $args);
-}
-
-@mixin fixed($args) {
-	@include position(fixed, $args);
-}
-
-// @mixin triangle($dir, $left, $right, $height, $position, $args, $color) {
-
-// 	@include position($position, $args);
-// 	display: block;
-// 	width: 0;
-// 	height: 0;
-// 	content: '';
-// 	border-color: transparent;
-// 	border-style: solid;
-
-// 	@if $dir == top or $dir == bottom {
-// 		border-left-width:   $left;
-// 		border-right-width:  $right;
-// 	} 
-// 	@else if $dir == right or $dir == left {
-// 		border-bottom-width: $left;
-// 		border-top-width:    $right;
-// 	}
-
-// 	@if $dir == top {
-// 		border-bottom-width: $height;
-// 		border-bottom-color: $color;
-// 	} @elseif $dir == bottom {
-// 		border-top-width: $height;
-// 		border-top-color: $color;
-// 	} @elseif $dir == left {
-// 		border-right-width: $height;
-// 		border-right-color: $color;
-// 	} @elseif $dir == right {
-// 		border-left-width: $height;
-// 		border-left-color: $color;
-// 	}
-
-// }

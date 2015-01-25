@@ -1,5 +1,5 @@
 /*--------------------------------------------------------*\
-   Universals
+	Universals
 \*--------------------------------------------------------*/
 
 html {
@@ -23,7 +23,6 @@ a {
 }
 
 .wrapper {
-	@include container;
 	opacity: 0;
 	transition: opacity 1s ease;
 	&.clean-load {
@@ -38,81 +37,9 @@ img {
 }
 
 .ctn {
-	@include container;
-	@include set-container-width(24, fluid);
 	display: block;
 	margin: 0 auto;
 	position: relative;
 	max-width: 74rem;
 	padding: 0 5rem;
-	@include at-breakpoint($at-896) {
-		padding: 0 4rem;
-	}
-	@include at-breakpoint($at-768) {
-		padding: 0 3.5rem;
-	}
-	@include at-breakpoint($at-720) {
-		padding: 0 3rem;
-	}
-	@include at-breakpoint($at-480) {
-		padding: 0 1.5rem;
-	}
-	@include at-breakpoint($at-320) {
-		padding: 0 1rem;
-	}
-}
-
-/*--------------------------------------------------------*\
-   Mains
-\*--------------------------------------------------------*/
-
-.section-title {
-	@include span-columns(24,24);;
-	@include lt(2rem, 1.25);
-	margin-bottom: 1.5rem;
-}
-
-.cnt {
-	@include span-columns(18,24);
-	@include squish(3,3);
-	@include lt(0.9rem, 1.5);
-	p {
-		margin-bottom: 1rem;
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-	ul {
-		list-style: disc;
-		list-style-position: outside;
-		margin-left: 1rem;
-		li {
-			margin-bottom: 1rem;
-		}
-	}
-	ol {
-		list-style: decimal;
-		list-style-position: outside;
-		margin-left: 1rem;
-		 li {
-		 	margin-bottom: 1rem;
-		 }
-	}
-	strong {
-		@include md(0.9rem, 1.5);
-	}
-	em {
-		@include lt(0.9rem, 1.5, italic);
-	}
-	a {
-		color: $teal;
-		@include rg(0.9rem, 1.5);
-		&:hover {
-			color: $teal-hover;
-		}
-		&.short-btn {
-			color: #fff;
-			@include md(0.9rem, 1.5);
-		}
-	}
 }

@@ -4,22 +4,22 @@
 
 .menu-button {
 	display: none;
-	@include at-breakpoint($at-960) {
-		display: block;
-		position: absolute;
-		top: 0;
-		@include ctn-absolute(right);
-		z-index: 1000;
-		width: 2.5rem;
-		height: 2rem;
-		text-indent: 2.5rem;
-		color: transparent;
-		background: transparent;
-		cursor: pointer;
-		padding: 0;
-		border: 0;
-		outline: none;
-	}
+	// @include at-breakpoint($at-960) {
+	// 	display: block;
+	// 	position: absolute;
+	// 	top: 0;
+	// 	@include ctn-absolute(right);
+	// 	z-index: 1000;
+	// 	width: 2.5rem;
+	// 	height: 2rem;
+	// 	text-indent: 2.5rem;
+	// 	color: transparent;
+	// 	background: transparent;
+	// 	cursor: pointer;
+	// 	padding: 0;
+	// 	border: 0;
+	// 	outline: none;
+	// }
 }
 
 .menu-button span,
