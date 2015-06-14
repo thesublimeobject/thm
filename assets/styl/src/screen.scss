@@ -1,31 +1,26 @@
 /*--------------------------------------------------------*\
-   Libs
+	Libs
 \*--------------------------------------------------------*/
 
-@import "bourbon";
-@import "neat";
+@import "../lib/susy";
+@import "mains/base";
+@import "../lib/mq";
 
 /*--------------------------------------------------------*\
-   Mains
+	Mains
 \*--------------------------------------------------------*/
 
 @import "mains/base";
 @import "mains/reset";
 @import "mains/colors";
 @import "mains/fonts";
-@import "mains/icons";
 @import "mains/mixins";
 @import "mains/universals";
-@import "mains/vars";
 
 /*--------------------------------------------------------*\
-   Site
+	Site
 \*--------------------------------------------------------*/
 
 @import "site/header";
 @import "site/home";
 @import "site/footer";
-
-/*--------------------------------------------------------*\
-   Libs
-\*--------------------------------------------------------*/

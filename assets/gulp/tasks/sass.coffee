@@ -5,7 +5,8 @@ sourcemaps   = require('gulp-sourcemaps')
 handleErrors = require('../util/handleErrors')
 config       = require('../config').sass
 autoprefixer = require('gulp-autoprefixer')
-neat 		 = require('node-neat').includePaths
+minifyCSS    = require 'gulp-minify-css'
+rename		 = require 'gulp-rename'
 
 gulp.task 'sass', ->
 	return gulp.src('styl/src/screen.scss')
@@ -14,12 +15,24 @@ gulp.task 'sass', ->
 			sourceComments: 'map'
 			imagePath: '/img'
 			errLogToConsole: true
-			includePaths: ['sass'].concat(neat)
+			includePaths: ['sass']
+			indentType: 'tab'
+			indentWidth: 1
 		)
 		.pipe(autoprefixer
 			browsers: ['last 2 version'] 
 		)
+		.pipe(minifyCSS())
+
+		# Write production file: minified and sourcemap removed.
+		.pipe(rename('screen.min.css'))
+		.pipe(gulp.dest(config.dest))
+
+		# Write sourcemaps
 		.pipe(sourcemaps.write())
 		.on('error', handleErrors)
+
+		# Write regular file for debugging with sourcemaps.
+		.pipe(rename('screen.css'))
 		.pipe(gulp.dest(config.dest))
-		.pipe(browserSync.reload({stream:true}))
+		.pipe(browserSync.reload({ stream: true }))

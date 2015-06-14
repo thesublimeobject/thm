@@ -1,10 +1,13 @@
 // Susy Next Syntax
 // ================
 
-@import "../math";
+$susy-version: 2.1;
+
+@import "../su";
 @import "../output/float";
 
 @import "susy/settings";
+@import "susy/validation";
 @import "susy/grids";
 @import "susy/box-sizing";
 @import "susy/context";

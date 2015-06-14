@@ -1,36 +1,40 @@
 /*--------------------------------------------------------*\
-	Susy // Breakpoint
+	Susy // MQ
 \*--------------------------------------------------------*/
 
-$total-columns  : 24;
-$column-width   : 4em;
-$gutter-width   : 1em;
-$grid-padding   : 0;
+$susy: (
+	math: fluid,
+	gutter-position: after,
+	container: auto,
+	container-position: center,
+	columns: 24,
+);
 
-$container-style: fluid;
-
-$at-1216: 24 76em;
-$at-1200: 24 75em;
-$at-1168: 24 73em;
-$at-1120: 24 70em;
-$at-1072: 24 67em;
-$at-1056: 24 66em;
-$at-1024: 24 64em;
-$at-976:  24 61em;
-$at-960:  24 60em;
-$at-896:  24 56em;
-$at-864:  24 54em;
-$at-848:  24 53em;
-$at-816:  24 51em;
-$at-800:  24 50em;
-$at-768:  24 48em;
-$at-720:  24 45em;
-$at-684:  24 43em;
-$at-640:  24 40em;
-$at-608:  24 38em;
-$at-560:  24 35em;
-$at-540:  24 34em;
-$at-480:  24 30em;
-$at-440:  24 27.5em;
-$at-400:  24 25em;
-$at-320:  24 20em;
+$mq-responsive: true;
+$mq-breakpoints: (
+    at-1216: 76em,
+    at-1200: 75em,
+    at-1168: 73em,
+    at-1120: 70em,
+    at-1072: 67em,
+    at-1056: 66em,
+    at-1024: 64em,
+    at-976:  61em,
+    at-960:  60em,
+    at-896:  56em,
+    at-864:  54em,
+    at-848:  53em,
+    at-816:  51em,
+    at-800:  50em,
+    at-768:  48em,
+    at-720:  45em,
+    at-684:  43em,
+    at-640:  40em,
+    at-608:  38em,
+    at-560:  35em,
+    at-540:  34em,
+    at-480:  30em,
+    at-440:  27.5em,
+    at-400:  25em,
+    at-320:  20em
+);

@@ -5,6 +5,9 @@ bundleLogger = require '../util/bundleLogger'
 gulp         = require 'gulp'
 handleErrors = require '../util/handleErrors'
 source       = require 'vinyl-source-stream'
+buffer		 = require 'vinyl-buffer'
+uglify		 = require 'gulp-uglify'
+rename		 = require 'gulp-rename'
 config       = require('../config').browserify
 _            = require 'lodash'
 
@@ -27,6 +30,10 @@ browserifyTask = (callback, devMode) ->
 				.bundle()
 				.on 'error', handleErrors
 				.pipe(source(bundleConfig.outputName))
+				.pipe(gulp.dest(bundleConfig.dest))
+				.pipe(buffer())
+				.pipe(uglify())
+				.pipe(rename('app.min.js'))
 				.pipe(gulp.dest(bundleConfig.dest))
 				.on 'end', reportFinished
 				.pipe(browserSync.reload

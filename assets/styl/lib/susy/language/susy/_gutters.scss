@@ -9,14 +9,17 @@
 @mixin gutters(
   $span: $susy
 ) {
-  $span: parse-gutters($span);
-  $_gutters: get-gutters($span);
+  $inspect  : $span;
+  $span     : parse-gutters($span);
+  $_gutters : get-gutters($span);
 
   $_output: (
     before: map-get($_gutters, before),
     after: map-get($_gutters, after),
     flow: susy-get(flow, $span),
   );
+
+  @include susy-inspect(gutters, $inspect);
 
   @if is-inside($span) {
     @include padding-output($_output...);
@@ -66,14 +69,15 @@
   $_gutters : susy-get(gutters, $context);
   $_gutter  : susy-get(gutter-override, $context);
 
-  @if $_gutters and ($_gutters > 0) and not $_gutter {
+  @if $_gutters and ($_gutters > 0) and not($_gutter) {
     $_column-width: susy-get(column-width, $context);
-    @if $_column-width and gutter-math($context) == static {
-      $_gutter: $_gutters * $_column-width;
+    $_math: gutter-math($context);
+    @if $_math == static {
+      $_gutter: $_gutters * valid-column-math($_math, $_column-width);
     } @else {
       $_columns : susy-get(columns, $context);
       $_spread  : if(is-split($context), wide, susy-get(spread, $context));
-      $_gutter  : percentage($_gutters / column-sum($_columns, $_gutters, $_spread));
+      $_gutter  : percentage($_gutters / susy-sum($_columns, $_gutters, $_spread));
     }
   }
 

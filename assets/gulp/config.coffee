@@ -1,4 +1,3 @@
-neat = require('node-neat').includePaths
 dest = "../bld"
 src = "./src"
 
@@ -19,13 +18,12 @@ module.exports =
 			sourceComments: 'map',
 			imagePath: '/img',
 			errLogToConsole: true,
-			includePaths: ['sass'].concat(neat)
 
 	markup:
 		src: ['../*.html', '../*.php', '../inc/*.php', '../templates/*.php']
 
 	images:
-		src: "/img/**"
+		src: "img/**/*"
 		dest: dest + "/img"
 
 	browserify:

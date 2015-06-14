@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,14 +12,6 @@
 	<div class="wrapper">
 		<header class="header">
 			<div class="ctn">
-				<div class="logo"><a href="/">
-					<img src="" alt="">
-				</a></div>
-				<nav class="nav">
-					<?php 
-						$args = array ( 'menu' => 'Navigation', 'container' => false );
-						wp_nav_menu( $args );
-					?>
-				</nav>
+				<nav class="nav"></nav>
 			</div>
 		</header>	

@@ -37,43 +37,26 @@ $timing: cubic-bezier(0.190, 1.000, 0.220, 1.000);
 }
 
 /*--------------------------------------------------------*\
-	Align with .ctn
+	Align with .ctn, absolutely.
 \*--------------------------------------------------------*/
+
 
 @mixin ctn-absolute($dir) {
 	@if ($dir == left) {
-		left: 5rem;
-		@include at-breakpoint($at-896) {
-			left: 4rem;
+		left: 3.5rem;
+		@include mq($until: at-640) {
+			left: 2rem;
 		}
-		@include at-breakpoint($at-768) {
-			left: 3.5rem;
-		}
-		@include at-breakpoint($at-720) {
-			left: 3rem;
-		}
-		@include at-breakpoint($at-480) {
+		@include mq($until: at-480) {
 			left: 1.5rem;
 		}
-		@include at-breakpoint($at-320) {
-			left: 1rem;
-		}
 	} @else {
-		right: 5rem;
-		@include at-breakpoint($at-896) {
-			right: 4rem;
+		right: 3.5rem;
+		@include mq($until: at-640) {
+			right: 2rem;
 		}
-		@include at-breakpoint($at-768) {
-			right: 3.5rem;
-		}
-		@include at-breakpoint($at-720) {
-			right: 3rem;
-		}
-		@include at-breakpoint($at-480) {
+		@include mq($until: at-480) {
 			right: 1.5rem;
-		}
-		@include at-breakpoint($at-320) {
-			right: 1rem;
 		}
 	}
 }
