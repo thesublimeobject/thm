@@ -39,3 +39,26 @@ function thm_posts_register() {
 	
 	register_post_type('news' , $args);
 }
+
+/*--------------------------------------------------------*\
+	Register Custom Taxonomies
+\*--------------------------------------------------------*/
+
+// add_action('init', 'register_tax');
+
+// function register_tax() {
+// 	register_taxonomy ( 
+// 		'team_categories', 
+// 		'team', 
+// 		array(
+// 			'labels' => array(
+// 				'name' => 'Category',
+// 				'add_new_item' => 'Add New Category',
+// 				'new_item_name' => 'New Category'
+// 			),
+// 			'show_ui' => true,
+// 			'hierarchical' => true,
+// 			'show_tagcloud' => false
+// 		) 
+// 	);
+// }
