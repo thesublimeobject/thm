@@ -6,7 +6,7 @@ module.exports = ->
 
 	notify.onError
 		title: 'Compile Error'
-		message: '<%= error.message %>'
+		message: '<%= error %>'
 	.apply(@, args)
 
 	@emit 'end'
