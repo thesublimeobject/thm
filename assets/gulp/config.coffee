@@ -1,4 +1,4 @@
-dest = "../bld"
+dest = "./../../../../bld"
 src = "./src"
 
 module.exports =
