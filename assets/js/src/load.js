@@ -44,13 +44,13 @@ X.prototype.load=function(a){a(this.p)};function Y(a,b){this.d=a;this.f=b;this.p
 Y.prototype.load=function(a){a(this.p)};function Z(a,b){this.d=a;this.f=b}Z.prototype.load=function(a){var b,c,d=this.f.urls||[],e=this.f.families||[],f=this.f.testStrings||{};b=0;for(c=d.length;b<c;b++)v(this.d,d[b]);d=[];b=0;for(c=e.length;b<c;b++){var g=e[b].split(":");if(g[1])for(var h=g[1].split(","),m=0;m<h.length;m+=1)d.push(new H(g[0],h[m]));else d.push(new H(g[0]))}a(d,f)};Z.prototype.L=function(a,b){return b(a.k.Y)};var $=new U(this);$.B.C.custom=function(a,b){return new Z(b,a)};$.B.C.fontdeck=function(a,b){return new W(b,a)};$.B.C.monotype=function(a,b){return new Y(b,a)};$.B.C.typekit=function(a,b){return new X(b,a)};$.B.C.google=function(a,b){return new V(b,a)};this.WebFont||(this.WebFont={},this.WebFont.load=k($.load,$),this.WebFontConfig&&$.load(this.WebFontConfig));})(this,document);
 
 // Init WebFonts on Load
-WebFont.load({
-	custom: {
-		families: ['Gotham Rounded A', 'Gotham Rounded B'],
-		urls: ['//cloud.typography.com/7655652/614946/css/fonts.css']
-	},
-	timeout: 5000
-});
+// WebFont.load({
+// 	custom: {
+// 		families: ['Gotham Rounded A', 'Gotham Rounded B'],
+// 		urls: ['//cloud.typography.com/7655652/614946/css/fonts.css']
+// 	},
+// 	timeout: 5000
+// });
 
 // onLoadCss
 function onloadCSS( ss, callback ) {
@@ -103,7 +103,7 @@ function loadCSS( href, before, media, callback ){
 
 var today = new Date().getTime();
 var filename = window.location.hostname.indexOf('localhost') > -1 ? "screen.css" : "screen.min.css";
-var ss = loadCSS( "//" + window.location.hostname + ( location.port ? ":" + location.port : "" ) + "/cnt/themes/" + dirname + "/bld/" + filename + '?v=' + today );
+var ss = loadCSS( "//" + window.location.hostname + ( location.port ? ":" + location.port : "" ) + "/bld/" + filename + '?v=' + today );
 
 // Init Load Function for CSS, JS
 onloadCSS( ss, function() {
@@ -117,9 +117,9 @@ onloadCSS( ss, function() {
 
 		var host = window.location.host;
 		if ( host.indexOf( 'dev' ) > -1 && host.indexOf( 'kbddev' ) < 0 || host.indexOf( 'local' ) > -1 ) {
-			appjs.src = "//" + window.location.hostname + ( location.port ? ":" + location.port : "" ) + "/cnt/themes/" + dirname + "/bld/app.js?v=" + today;
+			appjs.src = "//" + window.location.hostname + ( location.port ? ":" + location.port : "" ) + "/bld/app.js?v=" + today;
 		} else {
-			appjs.src = "//" + window.location.hostname + ( location.port ? ":" + location.port : "" ) + "/cnt/themes/" + dirname + "/bld/app.min.js?v=" + today;
+			appjs.src = "//" + window.location.hostname + ( location.port ? ":" + location.port : "" ) + "/bld/app.min.js?v=" + today;
 		}
 		document.body.appendChild(appjs);
 	}
