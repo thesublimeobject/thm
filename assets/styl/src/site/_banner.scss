@@ -1,0 +1,18 @@
+/*--------------------------------------------------------*\
+	Banner
+\*--------------------------------------------------------*/
+
+.block__banner {
+	@include span(24);
+	height: 40rem;
+}
+
+.banner__slider {
+	@include span(24);
+	height: 40rem;
+}
+
+.banner__item {
+	@include span(24);
+	height: 40rem;
+}

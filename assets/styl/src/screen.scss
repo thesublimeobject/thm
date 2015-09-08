@@ -21,6 +21,9 @@
 	Site
 \*--------------------------------------------------------*/
 
+@import "modal";
 @import "site/header";
-@import "site/home";
+@import "site/block";
 @import "site/footer";
+@import "site/banner";
+@import "site/content";

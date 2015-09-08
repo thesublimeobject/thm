@@ -1,8 +1,10 @@
+<?php 
+	$banners = get_sub_field( 'banner_item' );
+?>
 <section class="block block__banner">
 	<ul class="banner__slider" id="banner__slider">
 	<?php  
 		$html = '';
-		$banners = get_sub_field( 'banner_item' );
 		foreach ( $banners as $i => $banner ) {
 
 			# Vars
@@ -11,7 +13,13 @@
 			$buttons = $banner['buttons'];
 			$bg_image = $banner['background_image'];
 			$bg_url = $bg_image['url'];
-			$bg = 'style="background-image: url(' . $bg_url . ')"';
+
+			# Lazyload all except first banner image
+			if ( $i == 0 ) {
+				$bg = 'style="background-image: url(' . $bg_url . ')"';
+			} else {
+				$bg = 'data-bg="url(' . $bg_url . ')"';
+			}
 
 			# Begin Output
 			$html .= '<li class="banner__item" data-slidr="' . get_nums( $i ) . '" ' . $bg . '>';

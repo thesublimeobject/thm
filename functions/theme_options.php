@@ -17,6 +17,20 @@ if ( function_exists( 'add_theme_support' ) ) {
 }
 
 /*--------------------------------------------------------*\
+	Get Theme Directory Path
+\*--------------------------------------------------------*/
+
+function get_theme_name() {
+	$theme_path = explode('/', get_template_directory());
+	$dirname = $theme_path[ count( $theme_path ) - 1 ]; ?>
+	<script>
+	var dirname = "<?php echo $dirname; ?>";
+	</script>
+<?php }
+
+add_action('wp_head','get_theme_name');
+
+/*--------------------------------------------------------*\
 	Register Ajax
 \*--------------------------------------------------------*/
 

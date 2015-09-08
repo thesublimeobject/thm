@@ -1,13 +1,16 @@
 #*--------------------------------------------------------*#
-	# Banner
+	# Quotes
 #*--------------------------------------------------------*#
 
 slidr = require './../../lib/slidr/slidr.min.js'
+_debounce = require 'lodash/function/debounce'
+_parseInt = require 'lodash/string/parseInt'
+$ = jQuery
 
 module.exports = 
 
-	container: document.getElementById 'banner__slider'
-	items: document.getElementsByClassName 'banner__item'
+	container: document.getElementById 'quote__slider'
+	items: document.getElementsByClassName 'quote__item'
 	slidrItems: []
 
 	getItems: ->
@@ -21,29 +24,21 @@ module.exports =
 
 	slidrInit: ->
 		_this = @
-		Slidr = slidr.create('banner__slider',
-			breadcrumbs: true
-			controls: false
-			transition: 'fade'
-		).add('h', _this.slidrItems).auto(7500)
-		return
-
-	lazyload: ->
-		for item in @items
-			do (item) ->
-				data = item.getAttribute 'data-bg'
-				if data?
-					item.style.backgroundImage = data
-					item.setAttribute 'data-bg', ''
+		Slidr = slidr.create('quote__slider',
+			breadcrumbs: false
+			controls: 'border'
+			transition: 'cube'
+			overflow: true
+			pause: true
+		).add('h', _this.slidrItems).auto(10000)
 
 	init: ->
 		@getItems()
-		
+
 		# Only init slider if at least two items exits
 		if @slidrItems.length > 2
 			@slidrInit()
-
-		@lazyload()
 		return
+
 
 				

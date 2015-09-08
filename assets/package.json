@@ -28,6 +28,7 @@
     "gulp-util": "^3.0.2",
     "handlebars": "^3.0.3",
     "imagemin-pngquant": "^4.0.0",
+    "isotope-layout": "^2.2.2",
     "kbd-modal": "^1.1.8",
     "lodash": "^3.9.3",
     "pretty-hrtime": "^1.0.0",
