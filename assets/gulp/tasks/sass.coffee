@@ -7,6 +7,7 @@ config       = require('../config').sass
 autoprefixer = require('gulp-autoprefixer')
 minifyCSS    = require 'gulp-minify-css'
 rename		 = require 'gulp-rename'
+modal		 = require('kbd-modal').includePaths
 
 gulp.task 'sass', ->
 	return gulp.src('styl/src/screen.scss')
@@ -15,7 +16,7 @@ gulp.task 'sass', ->
 			sourceComments: 'map'
 			imagePath: '/img'
 			errLogToConsole: true
-			includePaths: ['sass']
+			includePaths: ['sass'].concat(modal)
 			indentType: 'tab'
 			indentWidth: 1
 		)
