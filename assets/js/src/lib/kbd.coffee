@@ -36,7 +36,7 @@ module.exports =
 		for el in els
 			do (el) ->
 				if el.innerHTML.indexOf('<br>') is -1 and el.innerHTML.indexOf('&nbsp') is -1
-					html = el.outerHTML
+					html = el.innerHTML
 					words = html.split ' '
 					if words.length > 4
 						words[words.length - 3] += '&nbsp;' + words[words.length - 2] + '&nbsp;' + words[words.length - 1]
