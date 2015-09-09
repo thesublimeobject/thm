@@ -2,7 +2,6 @@
 	# Requires
 #*--------------------------------------------------------*#
 
-_ = require 'lodash'
 classie = require 'classie'
 modal = require('kbd-modal').Modal
 mobileMenu = require './lib/menu'
@@ -27,3 +26,18 @@ m.init()
 #*--------------------------------------------------------*#
 
 banner = require './lib/banner'
+quotes = require './lib/quotes'
+team = require './lib/team'
+single = require './lib/single'
+
+if banner.container?
+	banner.init()
+
+if quotes.container?
+	quotes.init()
+
+if team.container?
+	team.init()
+
+if single.container?
+	single.init()

@@ -37,6 +37,31 @@ function get_content() {
 }
 
 /*--------------------------------------------------------*\
+	Remove Empty <p> tags from the_content()
+\*--------------------------------------------------------*/
+
+function remove_empty_p( $content ) {
+	$content = force_balance_tags( $content );
+	$content = preg_replace( '#<p>\s*+(<br\s*/*>)?\s*</p>#i', '', $content );
+	$content = preg_replace( '~\s?<p>(\s|&nbsp;)+</p>\s?~', '', $content );
+	return $content;
+}
+
+add_filter('the_content', 'remove_empty_p', 20, 1);
+
+/*--------------------------------------------------------*\
+	Get Featured Image URL
+\*--------------------------------------------------------*/
+
+function get_post_thumbnail_url( $size ) {
+	$id = get_post_thumbnail_id();
+	$src = wp_get_attachment_image_src($id, $size);
+	$url = $src[0];
+	$bg = 'style="background-image: url(' . $url . '");';
+	return $bg;
+}
+
+/*--------------------------------------------------------*\
 	TweetPHP
 \*--------------------------------------------------------*/
 

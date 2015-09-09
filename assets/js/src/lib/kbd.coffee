@@ -17,7 +17,7 @@ module.exports =
 			# Set element equal to parent element
 			el = el.parentNode
 
-	splitWidows: (els) ->
+	splitOrphans: (els) ->
 		for el in els
 			do (el) ->
 				if el.innerHTML.indexOf('<br>') is -1
@@ -32,12 +32,12 @@ module.exports =
 					html = title.join(' ')
 					el.innerHTML = html
 
-	trailingWidows: (els) ->
+	trailingOrphans: (els) ->
 		for el in els
 			do (el) ->
-				if el.innerHTML.indexOf('<br>') is -1
-					text = el.textContent
-					words = text.split(' ')
+				if el.innerHTML.indexOf('<br>') is -1 and el.innerHTML.indexOf('&nbsp') is -1
+					html = el.outerHTML
+					words = html.split ' '
 					if words.length > 4
 						words[words.length - 3] += '&nbsp;' + words[words.length - 2] + '&nbsp;' + words[words.length - 1]
 						words.splice(words.length - 2, 2)
