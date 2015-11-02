@@ -20,6 +20,7 @@ gulp.task 'sass', ->
 			indentType: 'tab'
 			indentWidth: 1
 		)
+		.on('error', handleErrors)
 		.pipe(autoprefixer
 			browsers: ['last 2 version'] 
 		)
@@ -31,7 +32,6 @@ gulp.task 'sass', ->
 
 		# Write sourcemaps
 		.pipe(sourcemaps.write())
-		.on('error', handleErrors)
 
 		# Write regular file for debugging with sourcemaps.
 		.pipe(rename('screen.css'))
