@@ -2,9 +2,8 @@
 /**
  * Returns post objects according to post type. Used in place of WP loop.
  *
- * Used as a replacement for 'The Loop,' wp_query, etc. In order to use
- * do the following in whatever page or template you want to display 
- * your posts:
+ * Used as a replacement for 'The Loop,' wp_query, etc. To display the 
+ * available $post[] options for your loop, use the following:
  * 
  * <?php
  *     // Instantiates Loops() and prints each key and value per post
@@ -12,22 +11,49 @@
  *     $blog = new Loops();
  *     $blog_posts = $blog->loopPosts($type,$args);
  *
- *     foreach ($blog_post as $post) {
- *     
- *          echo '<article>';
- *          
- *          foreach ($post as $key=>$val):
- *               if (gettype($val) != 'array'):
- *                   echo '<strong>'.$key.':</strong> '. $val . '<br>';
- *               else:
- *                   echo '<strong>'.$key.':</strong> '. $val[0] . '<br>';
- *               endif;
- *          endforeach;
- *
- *           echo '</article>';
- *              
- *     }
+ *		foreach ($blog_posts as $post) {
+ *			 foreach ( $post as $key=>$val ) {
+ *				echo '<strong>$post["'. $key .'"]</strong> = "'. $val . '"<br>';
+ *			 }
+ *		}
  *?>
+ *
+ * To implement on a page, replace the innermost foreach loop from above
+ * with something like the following (actual code will vary):
+ *
+ * <?php
+ *     // Instantiates Loops() and prints each key and value per post
+ *     include_once ( 'path/to/loops.php' );
+ *     $blog = new Loops();
+ *     $blog_posts = $blog->loopPosts($type,$args);
+ *
+ *     foreach ($blog_posts as $post) {
+ *				setup_postdata($post); // Necessary for wordpress
+ *				$id = $post['id'];
+ *				$title = $post['title'];
+ *				$author = $post['author'];
+ *				...
+ * 				wp_reset_postdata();
+ *
+ * 				$output = '';
+ *
+ * 				//Build HTML for post item
+ *     			$output .= '<div class="post-item">'; // post-item open
+ *				$output .= '<div class="post-item__header">'; // post-item__header open
+ *				$output .= '<h3 class="post-item__title">'. $title .'</h3>';
+ *				$output .= '</div>'; // post-item__header close
+ *				$output .= '<div class="post-item__main">'; // post-item__main open
+ *				$output .= $content;
+ *				$output .= '</div>'; // post-item__main close
+ *				$output .= '</div>'; // post-item close 
+ *		}
+ *
+ * 		echo '<div class="post-item__container">';
+ * 		echo $output;
+ * 		echo '<div class="post-item__container">';
+ *?>
+ *
+ *
  * 
  * @package  WordPress
  * @subpackage Loops
@@ -41,8 +67,11 @@
  */
 class Loops {
 
+	
 	/**
 	 * Constructor
+	 *
+	 * @method  __construct
 	 */
 	public function __construct() {
 		/**
@@ -117,7 +146,7 @@ class Loops {
 		// If 'blog' CPT exists, use it; otherwise use 'post'
 		if( $this->type === 'blog' || $this->type === 'post' ) {
 			if( post_type_exists( 'blog' ) ):
-				if (get_posts( 'post_type=blog') ) {
+				if (get_posts( array('post_type'=>'blog')) ) {
 					$this->args = array_merge(
 									$this->args,
 									array('post_type' => 'blog')
@@ -178,16 +207,18 @@ class Loops {
 			// Universal Variables
 			$id      = \get_the_id();
 			$url     = (\get_field('external_url')) ? \get_field('external_url') : \get_permalink();
-			$date    = array('Nov 7, 2015','Nov 8, 2015'); 
-			$time    = strtotime( (gettype($date) == 'array') ? $date[0] : $date );
+			$date    = get_the_date();
+			$time    = strtotime( $date );
 			$title   = \get_the_title();
 			$author  = \get_the_author();
 			$image   = ( \has_post_thumbnail() ) ? \wp_get_attachment_image_src( \get_post_thumbnail_id(),'full' )[0] : null;
 			$content = get_the_content();
+			$excerpt = get_the_excerpt();
 			$target  = (\get_field('external_url')) ? 'target="_blank"' : null;
 			
 
 			// Specific CPT Variables
+			$order = (\get_field('order')) ? \get_field('order') : \strtotime(\get_the_date());       // Team
 			$position = get_field('position'); // Team
 			$source = get_field('source');     // News, Press, Events
 			$twitter = get_field('twitter');   // Team, News, Press, Events
@@ -203,7 +234,9 @@ class Loops {
 						'date'   	=> $date,
 						'time'   	=> $time,   
 						'url'    	=> $url,
-						'thumbnail' => $image
+						'thumbnail' => $image,
+						'excerpt'   => $excerpt,
+						'content'   => $content
 					);
 
 			// Store Specific CPT Variables in $item[]
@@ -218,6 +251,7 @@ class Loops {
 					break;
 				case 'team':
 					$item = array_merge($item, array(
+					            'order'    => $order,
 								'position' => $position,
 								'twitter'  => $twitter,
 								'facebook' => $facebook,
