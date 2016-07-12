@@ -1,4 +1,36 @@
 <?php
+/*--------------------------------------------------------*\
+	Remove Admin Bar for non-admins
+\*--------------------------------------------------------*/
+
+add_action('after_setup_theme', 'remove_admin_bar');
+
+function remove_admin_bar() {
+	show_admin_bar(false);
+}
+
+/*--------------------------------------------------------*\
+	Custom Button
+\*--------------------------------------------------------*/
+
+function get__button($link, $text) {
+
+	# New tab?
+	$new = false;
+	$url = parse_url( $link );
+	if ( !empty( $url['host'] ) && $url['host'] !== $_SERVER['HTTP_HOST'] ) {
+		$new = true;
+	}
+
+	# HTML
+	$button = $new ? '<a href="' . $link . '" class="button" target="_blank">' : '<a href="' . $link . '" class="button">';
+	$button .= $text;
+	// $button .= '<span class="button__arrow">';
+	// $button .= get__file( '/bld/img/icons/arrow--right.svg' );
+	// $button .= '</span>';
+	$button .= '</a>';
+	return $button;
+}
 
 /*--------------------------------------------------------*\
 	Post Thumbnails

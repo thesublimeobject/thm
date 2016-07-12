@@ -12,7 +12,7 @@
 		$bg = get_post_thumbnail_url( 'full' );
 ?>
 
-<section class="block block__banner--single" <?php echo $bg; ?>>
+<section class="block block--banner-single" <?php echo $bg; ?>>
 	<div class="ctn">
 		<div class="block__main">
 			<h1 class="banner__title"><?php echo $title; ?></h1>

@@ -1,4 +1,4 @@
-<section class="block block__team" id="block__team">
+<section class="block block--team" id="block__team">
 	<div class="ctn">
 		<div class="block__header">
 		<?php 
