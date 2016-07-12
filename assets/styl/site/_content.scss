@@ -1,0 +1,60 @@
+/*--------------------------------------------------------*\
+	Content - Main Styles
+\*--------------------------------------------------------*/
+.content {
+	max-width: 48rem;
+	margin: 0 auto;
+	padding: 0 3rem;
+	@include m(768) {
+		padding: 0 2.5rem;
+	}
+	@include m(640) {
+		padding: 0 2rem;
+	}
+	@include m(480) {
+		padding: 0 1.5rem;
+	}
+	@include m(400) {
+		padding: 0 1.25rem;
+	}
+
+	// Content Typography
+	p {
+		margin-bottom: 1.5rem;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	strong {
+		font-weight: 700;
+	}
+
+	em {
+		font-style: italic;
+	}
+
+	ul {list-style: disc outside;}
+	ol {list-style: decimal outside;}
+	ul,ol {
+		margin-bottom: 1.5rem;
+		padding-left: 2rem;
+	}
+}
+
+/*--------------------------------------------------------*\
+	Content - Sidebars
+\*--------------------------------------------------------*/
+
+.content.content--sidebar {
+	display: inline-block;
+	padding-right: 2.5rem;
+	width: calc( 100% - 14rem );
+	vertical-align: top;
+}
+.content__sidebar {
+	display: inline-block;
+	float: right;
+	width: 14rem;
+	vertical-align: top;
+}

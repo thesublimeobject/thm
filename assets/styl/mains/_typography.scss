@@ -1,0 +1,28 @@
+/*--------------------------------------------------------*\
+	Typography
+\*--------------------------------------------------------*/
+@mixin title--banner {
+
+}
+@mixin title--lg {
+
+}
+@mixin title--md {
+
+}
+@mixin title--sm {
+
+}
+
+.title--banner {
+	@include title--banner;
+}
+.title--lg {
+	@include title--lg;
+}
+.title--md {
+	@include title--md;
+}
+.title--sm {
+	@include title--sm;
+}

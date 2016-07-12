@@ -1,0 +1,48 @@
+/*--------------------------------------------------------*\
+	Colors
+\*--------------------------------------------------------*/
+$black: #222;
+$white: #fff;
+$grey: #d1d5c9;
+
+// Theme Colors
+$body: $black;
+$green: #669933;
+$green-lt: #a5c867;
+$blue: #54a1aa;
+$orange: #e59421;
+$pink: #df74b1;
+$grey-dk: #3c4243;
+$grey-lt: #f8f8f8;
+
+
+
+/*--------------------------------------------------------*\
+	Backgrounds
+\*--------------------------------------------------------*/
+
+$colors:	white #ffffff,
+			black #222222,
+			grey #d1d5c9,
+			green #669933,
+			green-lt #a5c867,
+			blue #54a1aa,
+			orange #359421,
+			pink #df74b1;
+
+@each $color in $colors {
+	$color-name: nth($color, 1);
+	$color-var: nth($color, 2);
+
+	.bg--#{$color-name} {
+		background-color: $color-var;
+
+		@if ($color-name != white) {
+			color: #fff;
+
+			.content {
+				color: #fff;
+			}
+		}
+	}
+}
