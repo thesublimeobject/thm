@@ -2,7 +2,6 @@
 	Content - Main Styles
 \*--------------------------------------------------------*/
 .content {
-	max-width: 48rem;
 	margin: 0 auto;
 	padding: 0 3rem;
 	@include m(768) {
@@ -16,6 +15,13 @@
 	}
 	@include m(400) {
 		padding: 0 1.25rem;
+	}
+
+	p:last-child,
+	ul:last-child,
+	ol:last-child,
+	div:last-child {
+		margin-bottom: 0;
 	}
 
 	// Content Typography

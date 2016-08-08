@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@mixin x-lt($size, $line-height, $style: normal) {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 200;
+	font-size: $size;
+	line-height: $line-height;
+	@if ($style == italic) {
+		font-style: italic;
+	} @else {
+		font-style: normal;
+	}
+}
+
+@mixin lt($size, $line-height, $style: normal) {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: $size;
+	line-height: $line-height;
+	@if ($style == italic) {
+		font-style: italic;
+	} @else {
+		font-style: normal;
+	}
+}
+
+@mixin rg($size, $line-height, $style: normal) {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	font-size: $size;
+	line-height: $line-height;
+	@if ($style == italic) {
+		font-style: italic;
+	} @else {
+		font-style: normal;
+	}
+}
+
+@mixin md($size, $line-height, $style: normal) {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 500;
+	font-size: $size;
+	line-height: $line-height;
+	@if ($style == italic) {
+		font-style: italic;
+	} @else {
+		font-style: normal;
+	}
+}
+
+@mixin bd($size, $line-height, $style: normal) {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	font-size: $size;
+	line-height: $line-height;
+	@if ($style == italic) {
+		font-style: italic;
+	} @else {
+		font-style: normal;
+	}
+}
