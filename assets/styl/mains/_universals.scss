@@ -22,9 +22,9 @@ html, body {
 a {
 	transition: all 1s $timing;
 	text-decoration: none;
-	color: $blue;
+	color: blue;
 	&:hover {
-		color: $orange;
+		color: orange;
 	}
 }
 

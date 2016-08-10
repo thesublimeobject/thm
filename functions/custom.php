@@ -41,7 +41,7 @@ function get_tweets() {
     Get Modal
 \*--------------------------------------------------------*/
 function get__modal($content, $id, $video = false, $new_classes = null ) {
-	$md__html = ''
+	$md__html = '';
 	$classes = 'modal';
 
 	// Set Modal Classes
