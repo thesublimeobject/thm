@@ -1,0 +1,28 @@
+/*--------------------------------------------------------*\
+	Banners
+\*--------------------------------------------------------*/
+.block--banner { 
+	// inherits bg-center from .block
+	height: 35rem;
+	width: 100%;
+	
+	.banner__slider {
+
+	}
+	.banner__item {
+
+	}
+	.banner__content {
+		
+	}
+}
+
+// Remove Line Breaks on mobile
+@include m(480) {
+	.banner__item br {
+		content: "";
+		&:after {
+			content: "\00a0";
+		}
+	}
+}

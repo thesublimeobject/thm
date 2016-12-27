@@ -1,0 +1,62 @@
+
+/*--------------------------------------------------------*\
+	Variables
+\*--------------------------------------------------------*/
+
+// $content__container: 100%;
+
+/*--------------------------------------------------------*\
+	Content - Main Styles
+\*--------------------------------------------------------*/
+.content {
+	margin: 0 auto;
+	max-width: 100%;
+	
+	@include p();
+
+
+	h1, h2, h3, h4, h5, p, ul, ol, div {
+		&:only-child, &:last-child { margin-bottom: 0; }
+	}
+
+	// Content Typography
+	p { margin-bottom: 1.5rem;}
+	strong {font-weight: 700;}
+	em {font-style: italic;}
+
+	// Lists
+	ul {list-style: disc outside;}
+	ol {list-style: decimal outside;}
+	ul,ol {
+		margin-bottom: 1.5rem;
+		padding-left: 2rem;
+	}
+
+	// Quotes
+	blockquote {}
+	q {}
+}
+
+h1 {@include h1();}
+h2 {@include h2();}
+h3 {@include h3();}
+h4 {@include h4();}
+h5 {@include h5();}
+h6 {@include h6();}
+
+/*--------------------------------------------------------*\
+	Content - Sidebars
+\*--------------------------------------------------------*/
+
+.content.content--sidebar {
+	display: inline-block;
+	padding-right: 2.5rem;
+	width: calc( 100% - 14rem );
+	vertical-align: top;
+}
+.content__sidebar {
+	display: inline-block;
+	float: right;
+	width: 14rem;
+	vertical-align: top;
+}

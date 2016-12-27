@@ -4,7 +4,7 @@
         if (have_rows('block')): 
             while (have_rows('block')): the_row();
 
-                get_template_part( 'inc/loop', get_row_layout() );
+                get_template_part( 'modules/' . get_row_layout() );
                 
             endwhile;   
         endif;

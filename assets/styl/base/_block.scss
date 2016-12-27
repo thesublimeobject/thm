@@ -1,0 +1,62 @@
+/*--------------------------------------------------------*\
+	Variables
+\*--------------------------------------------------------*/
+$block__width: 80rem;
+$block__full: 100%;
+$block__large: calc(100% - 10rem);
+$block__small: 50rem;
+
+/*--------------------------------------------------------*\
+	Block ==> Mixins to Share
+\*--------------------------------------------------------*/
+
+@mixin blockPadding() {
+	padding: 5rem 0;
+	@include m(768) {
+		paddig: 3.5rem 0;
+	}
+	@include m(480) {
+		padding: 3rem 0;
+	}
+}
+
+/*--------------------------------------------------------*\
+	Block
+\*--------------------------------------------------------*/
+.block {
+	width: 100%;
+	position: relative;
+
+	@include bg-center;	
+	@include blockPadding();
+	
+	&__container {
+		width: 100%;
+		max-width: $block__width;
+		margin: 0 auto;
+		padding: 0 5rem;
+		position: relative;
+		z-index: 5;
+		
+		@include m(768) {
+			padding: 0 2.5rem;
+		}
+		@include m(640) {
+			padding: 0 2rem;
+		}
+		@include m(480) {
+			padding: 0 1.5rem;
+		}
+
+		&--full {
+			max-width: $block__full;
+		}
+
+		&--large {
+			max-width: $block__large;
+		}
+		&--small {
+			max-width: $block__small;
+		}
+	}
+}

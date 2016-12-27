@@ -20,7 +20,7 @@ import prodConfig     from './gulp/webpack.config.prod'
 import logger         from './gulp/util/logger'
 import handleErrors   from './gulp/util/handleErrors'
 import prettifyTime   from './gulp/util/prettifyTime'
-import { browserSync as bsConfig, sass as sassConfig, images, markup, build } from './gulp/config'
+import { browserSync: bsConfig, sass: sassConfig, images, markup, build } from './gulp/config'
 const browserSync = require('browser-sync').create()
 const reload = browserSync.reload
 
@@ -37,11 +37,28 @@ gulp.task('images', function() {
 				removeViewBox: false
 			}, {
 				cleanupIDs: false
+			}, {
+				removeUselessDefs: false
 			}],
 			use: [pngquant()],
 		}))
 		.pipe(gulp.dest(images.dest))
 		.pipe(browserSync.stream())
+})
+
+gulp.task('imagesProd', function() {
+	return gulp.src(images.src)
+		.pipe(changed(images.dest))
+		.pipe(imagemin({
+			progressive: true,
+			svgoPlugins: [{
+				removeViewBox: false
+			}, {
+				cleanupIDs: false
+			}],
+			use: [pngquant()],
+		}))
+		.pipe(gulp.dest(images.dest))
 })
 
 /*--------------------------------------------------------*\
@@ -56,10 +73,12 @@ gulp.task('sass', function() {
 		.pipe(autoprefixer({
 			browsers: ['> 0.5%', 'last 2 version', 'IE 10', 'IE 11', 'Safari 7'] 
 		}))
-		.pipe(cssnano())
+		
+		// TODO: Look into options here.
+		// .pipe(cssnano())
 
 		// Write production file: minified and sourcemap removed.
-		.pipe(rename(sassConfig.prod))
+		.pipe(rename(sassConfig.prod.app))
 		.pipe(gulp.dest(sassConfig.dest))
 
 		// Write sourcemaps
@@ -67,6 +86,48 @@ gulp.task('sass', function() {
 
 		// Write regular file for debugging with sourcemaps.
 		.pipe(rename(sassConfig.dev))
+		.pipe(gulp.dest(sassConfig.dest))
+		.pipe(browserSync.stream())
+})
+
+gulp.task('sassProd', function() {
+	return gulp.src(sassConfig.entry)
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 2.5%', 'last 2 version', 'IE >= 10', 'Safari >= 7', 'iOS >= 7'] 
+		}))
+		.pipe(cssnano())
+		.pipe(rename(sassConfig.prod.app))
+		.pipe(gulp.dest(sassConfig.dest))
+})
+
+/*--------------------------------------------------------*\
+	Critical
+\*--------------------------------------------------------*/
+
+gulp.task('sass:critical', function() {
+	return gulp.src(sassConfig.critical)
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 2.5%', 'last 2 version', 'IE >= 10', 'Safari >= 7', 'iOS >= 7']
+		}))
+		.pipe(cssnano())
+		.pipe(rename(sassConfig.prod.critical))
+		.pipe(gulp.dest(sassConfig.dest))
+		.pipe(browserSync.stream())
+})
+
+gulp.task('sassProd:critical', function() {
+	return gulp.src(sassConfig.critical)
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 2.5%', 'last 2 version', 'IE >= 10', 'Safari >= 7', 'iOS >= 7']
+		}))
+		.pipe(cssnano())
+		.pipe(rename(sassConfig.prod.critical))
 		.pipe(gulp.dest(sassConfig.dest))
 		.pipe(browserSync.stream())
 })
@@ -89,7 +150,7 @@ gulp.task('webpackProd', function() {
 	return gulp.src(['./js/src/app.js'])
 		.pipe(named())
 		.pipe(gulpWebpack(prodConfig, webpack))
-		.pipe(gulp.dest('../bld'))
+		.pipe(gulp.dest('../build'))
 })
 
 /*--------------------------------------------------------*\
@@ -113,4 +174,5 @@ gulp.task('serve', ['webpack', 'sass', 'images'], function() {
 	Default
 \*--------------------------------------------------------*/
 
-gulp.task('default', ['webpack', 'sass', 'images', 'serve'])
+gulp.task('default', ['webpack', 'sass', 'sass:critical', 'images', 'serve'])
+gulp.task('prod', ['webpackProd', 'sassProd', 'sassProd:critical', 'imagesProd'])

@@ -1,4 +1,4 @@
-const build = '../bld'
+const build = '../build'
 const themeName = 'thm'
 
 const config = {
@@ -10,9 +10,13 @@ const config = {
 	},
 	
 	sass: {
-		entry: 'styl/screen.scss',
-		dev: 'screen.css',
-		prod: 'screen.min.css',
+		entry: 'styl/app.scss',
+		critical: 'styl/critical.scss',
+		dev: 'app.css',
+		prod: {
+			app: 'app.min.css',
+			critical: 'critical.min.css',
+		},
 		src: 'styl/**/*',
 		dest: build,
 		settings: {
