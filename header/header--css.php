@@ -7,13 +7,11 @@
 # Production CSS File
 if ( strpos($_SERVER['HTTP_HOST'], 'com') > -1 || strpos($_SERVER['HTTP_HOST'], 'io') > -1 ) {
 	$stylesheet = '/build/app.min.css';
-	$ga = true;
 }
 
 # Development
 else {
 	$stylesheet = '/build/app.css';
-	$ga = false;
 }
 
 #  Output
