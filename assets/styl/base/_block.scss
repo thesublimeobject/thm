@@ -4,7 +4,7 @@
 $block__width: 80rem;
 $block__full: 100%;
 $block__large: calc(100% - 10rem);
-$block__small: 50rem;
+$block__small: 55rem;
 
 /*--------------------------------------------------------*\
 	Block ==> Mixins to Share
@@ -50,6 +50,7 @@ $block__small: 50rem;
 
 		&--full {
 			max-width: $block__full;
+			padding: 0;
 		}
 
 		&--large {

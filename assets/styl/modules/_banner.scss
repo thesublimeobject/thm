@@ -6,20 +6,19 @@
 	height: 35rem;
 	width: 100%;
 	
-	.banner__slider {
-
+	.banner__container {
+		@include bg-center;
+		@include cover;
 	}
-	.banner__item {
-
-	}
-	.banner__content {
-		
+	&--content .block__container {
+		@include center;
 	}
 }
 
 // Remove Line Breaks on mobile
 @include m(480) {
-	.banner__item br {
+	.block--banner h1 br,
+	.block--banner h2 br {
 		content: "";
 		&:after {
 			content: "\00a0";
