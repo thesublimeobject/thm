@@ -1,13 +1,11 @@
 			<footer class="footer">
-				&copy; <?php echo date('Y'); ?>
+				<div class="block__container">
+					<div class="footer__copyright">
+						<p class="copyright">&copy; <?php echo date('Y'); ?></p>
+					</div>
+				</div>
 			</footer>
 		</div>
-		<?php if ( strpos($_SERVER['HTTP_HOST'], 'com') > -1 || strpos($_SERVER['HTTP_HOST'], 'io') > -1 ) { 
-			echo '<script src="/build/app.min.js?' . time() . '"></script>';
-		} else {
-			echo '<script src="/build/app.js"></script>';
-		}
-		wp_footer(); ?>
-		<?php wp_footer(); ?>
+		<?php locate_template('footer/footer--scripts.php', true);  ?>
 	</body>
 </html>
