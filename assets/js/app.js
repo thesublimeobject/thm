@@ -23,12 +23,6 @@ document.body.classList.add('browser--' + browser.name, 'browser--' + browser.na
 import els from 'els'
 window.__els__ = els
 
-//import header from './lib/header'
-// import carousel from './lib/carousel'
-//header()
-// carousel()
-
-
 /*--------------------------------------------------------*\
 	Load...
 \*--------------------------------------------------------*/

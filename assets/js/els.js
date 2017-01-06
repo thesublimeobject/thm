@@ -9,9 +9,9 @@ const components = {
 			container: document.getElementById('carousel--module'),
 			selector: '.carousel__item',
 			items: document.getElementsByClassName('carousel__item'),
-			itemContainer: '.carousel__item--container',
+			itemContainer: '.carousel-item__container',
 			navigation: {
-				container: '#nav--module',
+				container: '#nav--carousel',
 				prev: '.carousel__prev',
 				next: '.carousel__next',
 			},
