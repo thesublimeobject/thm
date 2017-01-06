@@ -1,7 +1,7 @@
 <?php
 
 /*--------------------------------------------------------*\
-	Scripts
+	Remove jQuery // jQuery UI
 \*--------------------------------------------------------*/
 
 function remove__jquery(&$scripts) {
@@ -10,7 +10,12 @@ function remove__jquery(&$scripts) {
 		$scripts->remove( 'jquery-ui-core' );
 	}
 }
+
 add_action('wp_default_scripts', 'remove__jquery', 999);
+
+/*--------------------------------------------------------*\
+	Remove WP Scripts
+\*--------------------------------------------------------*/
 
 function remove__scripts() {
 	if ( !is_admin() ) {
@@ -35,4 +40,5 @@ function remove__scripts() {
 		add_filter( 'rewrite_rules_array', 'disable_embeds_rewrites' );
 	}
 }
+
 add_action('init', 'remove__scripts');
