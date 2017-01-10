@@ -1,0 +1,27 @@
+/*--------------------------------------------------------*\
+	Banners
+\*--------------------------------------------------------*/
+.block--banner { 
+	// inherits bg-center from .block
+	height: 35rem;
+	width: 100%;
+	
+	.banner__container {
+		@include bg-center;
+		@include cover;
+	}
+	&--content .block__container {
+		@include center;
+	}
+}
+
+// Remove Line Breaks on mobile
+@include m(480) {
+	.block--banner h1 br,
+	.block--banner h2 br {
+		content: "";
+		&:after {
+			content: "\00a0";
+		}
+	}
+}

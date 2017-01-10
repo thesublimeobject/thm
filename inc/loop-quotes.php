@@ -6,7 +6,7 @@
 	$bg = 'style="background-image: url(' . $bg_url . ')"';
 ?>
 
-<section class="block block__quotes" id="block__quotes" <?php if ( $bg_image ) echo $bg; ?>>
+<section class="block block--quotes" id="block--quotes" <?php if ( $bg_image ) echo $bg; ?>>
 	<div class="ctn">
 		<?php  
 

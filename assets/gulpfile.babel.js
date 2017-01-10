@@ -1,59 +1,178 @@
-import gulp from 'gulp'
-import gutil from 'gulp-util'
-import changed from 'gulp-changed'
-import imagemin from 'gulp-imagemin'
-import pngquant from 'imagemin-pngquant'
-import browserSync from 'browser-sync'
-import webpack from 'webpack'
-import webpackConfig from './webpack.config'
-import webpackDevServer from 'webpack-dev-server'
-import livereload from 'gulp-livereload'
+/*--------------------------------------------------------*\
+	Imports
+\*--------------------------------------------------------*/
 
-// Webpack
-gulp.task('webpack', () => {
-	new webpackDevServer(webpack(webpackConfig), {
-		publicPath: 'http://localhost:3000/public/',
-		contentBase: __dirname,
-		hot: true,
-		stats: {
-			colors: true
-		},
-		proxy: {
-			'*': 'http://localhost:3001'
-		}
-	}).listen(3000, 'localhost', (err) => {
-		if (err) console.log(err)
-		console.log('Listening at localhost:3000')
-	})
-})
+import gulp           from 'gulp'
+import imagemin       from 'gulp-imagemin'
+import pngquant       from 'imagemin-pngquant'
+import changed        from 'gulp-changed'
+import sass           from 'gulp-sass'
+import autoprefixer   from 'gulp-autoprefixer'
+import sourcemaps     from 'gulp-sourcemaps'
+import cssnano        from 'gulp-cssnano'
+import rename		  from 'gulp-rename'
+import webpack        from 'webpack'
+import gulpWebpack	  from 'gulp-webpack'
+import webpackLogger  from 'webpack-gulp-logger'
+import named 		  from 'vinyl-named'
+import config         from './gulp/webpack.config'
+import prodConfig     from './gulp/webpack.config.prod'
+import logger         from './gulp/util/logger'
+import handleErrors   from './gulp/util/handleErrors'
+import prettifyTime   from './gulp/util/prettifyTime'
+import { browserSync: bsConfig, sass: sassConfig, images, markup, build } from './gulp/config'
+const browserSync = require('browser-sync').create()
+const reload = browserSync.reload
 
+/*--------------------------------------------------------*\
+	Images
+\*--------------------------------------------------------*/
 
-// Get BS instance 'main' from webpack
-let bs = browserSync.get('main')
-
-// Reload
-gulp.task('reload', () => {
-	return bs.reload()
-})
-
-// Images
-gulp.task('images', () => {
-	return gulp.src('img/**/*')
-		.pipe(changed('./../bld/img'))
+gulp.task('images', function() {
+	return gulp.src(images.src)
+		.pipe(changed(images.dest))
 		.pipe(imagemin({
 			progressive: true,
-			svgoPlugins: [{removeViewBox: false}],
+			svgoPlugins: [{
+				removeViewBox: false
+			}, {
+				cleanupIDs: false
+			}, {
+				removeUselessDefs: false
+			}],
 			use: [pngquant()],
 		}))
-		.pipe(gulp.dest('./../bld/img'))
-		.pipe(bs.reload({ stream: true }))
+		.pipe(gulp.dest(images.dest))
+		.pipe(browserSync.stream())
 })
 
-// Watch
-gulp.task('watch', () => {
-	gulp.watch(['../cnt/themes/yo/**/*.php', '../cnt/themes/yo/**/*.html'], ['reload'])
-	gulp.watch(['img/**/*'], ['images'])
+gulp.task('imagesProd', function() {
+	return gulp.src(images.src)
+		.pipe(changed(images.dest))
+		.pipe(imagemin({
+			progressive: true,
+			svgoPlugins: [{
+				removeViewBox: false
+			}, {
+				cleanupIDs: false
+			}],
+			use: [pngquant()],
+		}))
+		.pipe(gulp.dest(images.dest))
 })
 
-// Default
-gulp.task('default', ['webpack', 'images', 'watch'])
+/*--------------------------------------------------------*\
+	Sass
+\*--------------------------------------------------------*/
+
+gulp.task('sass', function() {
+	return gulp.src(sassConfig.entry)
+		.pipe(sourcemaps.init())
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 0.5%', 'last 2 version', 'IE 10', 'IE 11', 'Safari 7'] 
+		}))
+		
+		// TODO: Look into options here.
+		// .pipe(cssnano())
+
+		// Write production file: minified and sourcemap removed.
+		.pipe(rename(sassConfig.prod.app))
+		.pipe(gulp.dest(sassConfig.dest))
+
+		// Write sourcemaps
+		.pipe(sourcemaps.write())
+
+		// Write regular file for debugging with sourcemaps.
+		.pipe(rename(sassConfig.dev))
+		.pipe(gulp.dest(sassConfig.dest))
+		.pipe(browserSync.stream())
+})
+
+gulp.task('sassProd', function() {
+	return gulp.src(sassConfig.entry)
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 2.5%', 'last 2 version', 'IE >= 10', 'Safari >= 7', 'iOS >= 7'] 
+		}))
+		.pipe(cssnano())
+		.pipe(rename(sassConfig.prod.app))
+		.pipe(gulp.dest(sassConfig.dest))
+})
+
+/*--------------------------------------------------------*\
+	Critical
+\*--------------------------------------------------------*/
+
+gulp.task('sass:critical', function() {
+	return gulp.src(sassConfig.critical)
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 2.5%', 'last 2 version', 'IE >= 10', 'Safari >= 7', 'iOS >= 7']
+		}))
+		.pipe(cssnano())
+		.pipe(rename(sassConfig.prod.critical))
+		.pipe(gulp.dest(sassConfig.dest))
+		.pipe(browserSync.stream())
+})
+
+gulp.task('sassProd:critical', function() {
+	return gulp.src(sassConfig.critical)
+		.pipe(sass(sassConfig.settings))
+		.on('error', handleErrors)
+		.pipe(autoprefixer({
+			browsers: ['> 2.5%', 'last 2 version', 'IE >= 10', 'Safari >= 7', 'iOS >= 7']
+		}))
+		.pipe(cssnano())
+		.pipe(rename(sassConfig.prod.critical))
+		.pipe(gulp.dest(sassConfig.dest))
+		.pipe(browserSync.stream())
+})
+
+/*--------------------------------------------------------*\
+	Webpack
+\*--------------------------------------------------------*/
+
+gulp.task('webpack', function() {
+	return webpack(config).watch(200, webpackLogger(function() {
+		browserSync.reload()
+	}))
+})
+
+/*--------------------------------------------------------*\
+	Webpack --> Production
+\*--------------------------------------------------------*/
+
+gulp.task('webpackProd', function() {
+	return gulp.src(['./js/src/app.js'])
+		.pipe(named())
+		.pipe(gulpWebpack(prodConfig, webpack))
+		.pipe(gulp.dest('../build'))
+})
+
+/*--------------------------------------------------------*\
+	BrowserSync
+\*--------------------------------------------------------*/
+
+gulp.task('serve', ['webpack', 'sass', 'images'], function() {
+	browserSync.init({
+		proxy: 'thm.dev/',
+		open: false,
+		ghostMode: false,
+		notify: false,
+	})
+	
+	gulp.watch(sassConfig.src, ['sass'])
+	gulp.watch(images.src, ['images', reload])
+	gulp.watch(markup.src, reload)
+})
+
+/*--------------------------------------------------------*\
+	Default
+\*--------------------------------------------------------*/
+
+gulp.task('default', ['webpack', 'sass', 'sass:critical', 'images', 'serve'])
+gulp.task('prod', ['webpackProd', 'sassProd', 'sassProd:critical', 'imagesProd'])

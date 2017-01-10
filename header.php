@@ -1,17 +1,11 @@
 <!doctype html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php wp_title( '|', true, 'right' ); ?><?php bloginfo( 'name' ); ?></title>
-	<?php wp_head(); ?>
-</head>
-
+<?php locate_template( 'header/header--head.php', true ); ?>
 <body>
-	<div class="wrapper">
-		<header class="header">
-			<div class="ctn">
-				<nav class="nav"></nav>
-			</div>
-		</header>	
+<?php
+	$pageSlug = !is_single() ? getSlug()['page__slug'] : 'single--' . camelCase($post->$post_type);
+	$wrapperClass = ['wrapper', 'wrapper--'.$pageSlug];
+	echo '<div class="' . join(' ', $wrapperClass) . '">';
+
+	locate_template( 'header/header--main.php', true );
+?>

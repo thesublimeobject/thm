@@ -13,8 +13,11 @@
  *
  *		foreach ($blog_posts as $post) {
  *			 foreach ( $post as $key=>$val ) {
+ *				if (gettype($val) != 'array') {
  *				echo '<strong>$post["'. $key .'"]</strong> = "'. $val . '"<br>';
- *			 }
+ *			} else {
+ *				echo '<strong>$post["'. $key .'"][0]</strong> = "'. $val[0] . '"<br>';
+ *			}
  *		}
  *?>
  *
@@ -27,7 +30,7 @@
  *     $blog = new Loops();
  *     $blog_posts = $blog->loopPosts($type,$args);
  *
- *     foreach ($blog_posts as $post) {
+ *		foreach ($blog_posts as $post) {
  *				setup_postdata($post); // Necessary for wordpress
  *				$id = $post['id'];
  *				$title = $post['title'];
@@ -65,9 +68,10 @@
  * @param  array  $newArgs Optional. Arguments to pass to \get_posts(). Expected.
  * @return array  $posts   Array of all posts objects for CPT.
  */
+
+
 class Loops {
 
-	
 	/**
 	 * Constructor
 	 *
@@ -84,27 +88,19 @@ class Loops {
 		/**
 		 * 2 Legit. 2 Legit 2 quit. Hey Hey.
 		 * Checks @param $type for legitimacy
+		 *
+		 * Add non-standard CPTs here as well.
+		 * 
 		 * @var  array $this->legit_types
 		 */
-		$this->legit_types = array(
-		                 'blog',
-		                 'post',
-		                 'news',
-		                 'events',
-		                 'press',
-		                 'team'
-		               );
+		$this->legit_types = array( 'blog', 'post', 'news', 'events', 'press', 'team' );
 
 		/**
 		 * Initialize arguments for WP Loop.
 		 * Default post type is 'post'
 		 * @var  array  $this->args
 		 */
-		$this->args =  array( 
-							'post_type' => 'post', 
-							'posts_per_page' => -1, 
-							'order' => 'DESC' 
-						);
+		$this->args =  array( 'post_type' => 'post', 'posts_per_page' => -1, 'order' => 'DESC' );
 	}
 
 
@@ -122,37 +118,25 @@ class Loops {
 
 		// Look to see if a legit $type has been passed by user
 		// Die if not.
-		if ( !in_array( strtolower( $type ), $this->legit_types ) ):
+		if ( !in_array( strtolower( $type ), $this->legit_types ) ) {
  			die('Unable to fulfill loop request. '.$type.' is not a valid post type.');
- 		else:
+		} else {
  			$this->type = strtolower( $type );
- 		endif;
+ 		}
+ 		
 
 		// Merge in Arguments if passed
 		if(isset($newArgs)) {
-
-			$this->args = array_merge(
-				$this->args,
-				$newArgs
-			);
-
+			$this->args = array_merge( $this->args, $newArgs );
 		} else {
-			$this->args = array_merge(
-			    $this->args,
-				array('post_type' => $this->type)
-			);
+			$this->args = array_merge( $this->args, array('post_type' => $this->type) );
 		}
 
 		// If 'blog' CPT exists, use it; otherwise use 'post'
 		if( $this->type === 'blog' || $this->type === 'post' ) {
-			if( post_type_exists( 'blog' ) ):
-				if (get_posts( array('post_type'=>'blog')) ) {
-					$this->args = array_merge(
-									$this->args,
-									array('post_type' => 'blog')
-								);
-				}
-			endif;
+			if( post_type_exists( 'blog' ) && get_posts(array('post_type'=>'blog')) ) {
+				$this->args = array_merge( $this->args, array('post_type' => 'blog') );
+			}
 		}
 		
 		//return $this->loopPosts($this->args, $type);
@@ -162,7 +146,7 @@ class Loops {
 
 
 	/**
-	 * Runs \get_posts() bases off of arguments passed from
+	 * Runs \get_posts() based off of arguments passed from
 	 * \getPosts()
 	 * 
 	 * @method  loopPosts
@@ -182,12 +166,14 @@ class Loops {
 		 * @var  array
 		 */
 		$posts = array();
+
 		/**
 		 * Empty array to store post values for each 
 		 * individual post.
 		 * @var  array
 		 */
 		$item = array();
+
 		/**
 		 * Gets posts based on arguments. Uses WP_Query.
 		 * @var  array
@@ -206,71 +192,82 @@ class Loops {
 
 			// Universal Variables
 			$id      = \get_the_id();
-			$url     = (\get_field('external_url')) ? \get_field('external_url') : \get_permalink();
-			$date    = get_the_date();
+			$url     = \get_field('external_url') 
+				? \get_field('external_url')
+				: \get_permalink();
+			$date    = \get_the_date();
 			$time    = strtotime( $date );
 			$title   = \get_the_title();
 			$author  = \get_the_author();
-			$image   = ( \has_post_thumbnail() ) ? \wp_get_attachment_image_src( \get_post_thumbnail_id(),'full' )[0] : null;
-			$content = get_the_content();
-			$excerpt = get_the_excerpt();
-			$target  = (\get_field('external_url')) ? 'target="_blank"' : null;
+			$image   = \has_post_thumbnail()
+				? \wp_get_attachment_image_src( \get_post_thumbnail_id(),'full' )[0] 
+				: null;
+			$content = \get_the_content();
+			$excerpt = \get_the_excerpt();
+			$target  = \get_field('external_url')
+				? 'target="_blank"'
+				: null;
 			
-
-			// Specific CPT Variables
-			$order = (\get_field('order')) ? \get_field('order') : \strtotime(\get_the_date());       // Team
-			$position = get_field('position'); // Team
-			$source = get_field('source');     // News, Press, Events
-			$twitter = get_field('twitter');   // Team, News, Press, Events
-			$facebook = get_field('facebook'); // Team, News, Press, Events
-			$linkedin = get_field('linkedin'); // Team, News, Press, Events
+			// Set Variables for Specific Custom Post Types
+			// Edit this list if you have CPT variables to add
+			//
+			// Specific CPT Variables  				// CPT
+			/*--------------------------------------------------------------*/
+			$order = \get_field('order')			// Team 
+				? \get_field('order')
+				: \strtotime(\get_the_date());       
+			$position = \get_field('position'); 	// Team
+			$source = \get_field('source');     	// News, Press, Events
+			$twitter = \get_field('twitter');   	// Team, News, Press, Events
+			$facebook = \get_field('facebook'); 	// Team, News, Press, Events
+			$linkedin = \get_field('linkedin'); 	// Team, News, Press, Events
 
 			// Store universal key/val in $item[]
 			$item = array(
-						'id'		=> $id,
-						'title'  	=> $title,
-						'author'    => $author,
-						'target' 	=> $target,
-						'date'   	=> $date,
-						'time'   	=> $time,   
-						'url'    	=> $url,
-						'thumbnail' => $image,
-						'excerpt'   => $excerpt,
-						'content'   => $content
-					);
+				'id'		=> $id,
+				'title'  	=> $title,
+				'author'    => $author,
+				'target' 	=> $target,
+				'date'   	=> $date,
+				'time'   	=> $time,   
+				'url'    	=> $url,
+				'thumbnail' => $image,
+				'excerpt'   => $excerpt,
+				'content'   => $content
+			);
 
 			// Store Specific CPT Variables in $item[]
-			switch ($type):
+			// Add 
+			switch ($type) {
 				case 'blog':
 				case 'post':
 					// $item = array_merge($item, 
-					//					array(
-					// 						//'key' => 'val'
-					// 					)
+					//	array(
+					// 		'key' => 'val'
+					// 	)
 					// );
 					break;
+
 				case 'team':
 					$item = array_merge($item, array(
-					            'order'    => $order,
-								'position' => $position,
-								'twitter'  => $twitter,
-								'facebook' => $facebook,
-								'linkedin' => $linkedin
-				 			)
-				 	);
+						'order'    => $order,
+						'position' => $position,
+						'twitter'  => $twitter,
+						'facebook' => $facebook,
+						'linkedin' => $linkedin
+				 	));
 				 	break;
 				case 'news':
 				case 'events':
 				case 'press':
 				 	$item = array_merge($item, array(
-								'source' => $source,
-								'twitter'  => $twitter,
-								'facebook' => $facebook,
-								'linkedin' => $linkedin
-				 			)
-				 	);
+						'source' => $source,
+						'twitter'  => $twitter,
+						'facebook' => $facebook,
+						'linkedin' => $linkedin
+				 	));
 				 	break;
-			endswitch;
+			}
 			
 			// Push individual post to array of posts
 			array_push( $posts, $item );

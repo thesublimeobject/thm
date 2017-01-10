@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
   "presets": ["es2015", "stage-0", "react"]
+=======
+	"presets": ["es2015-without-strict", "stage-0"],
+>>>>>>> bd17b4d95e380f70aca928a9a4ab4bffe6e44e4c
 }
